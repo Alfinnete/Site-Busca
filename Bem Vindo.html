@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Buscar</title>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #F2F2F2;
+}
+body,td,th {
+	font-size: 10px;
+	color: #000000;
+}
+
+</style>
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/advent-pro:n1:default.js" type="text/javascript"></script>
+
+</head>
+
+<body bgcolor="#F2F2F2" text="#000000">
+<table width="100%" border="0">
+  <tbody>
+    <tr>
+      <td height="181" align="center" valign="middle"><a href="Bem Vindo.html"><img src="../Logo/Logo Site.fw.png" width="580" height="102" alt=""/></a></td>
+    </tr>
+    <tr>
+      <td height="72" align="center" valign="middle"><p>
+        <input name="Buscar" type="search" autofocus id="Buscar" title="Buscar" autocomplete="off" size="100%" maxlength="300">
+        <br>
+        <br>
+        <input type="button" name="button" id="button" value="Buscar">
+        <!-- nosso botão que ativa a função ativa() //--> 
+<input type="button" id="botao" value="Ativar Filtro" onClick="ativa()"> 
+
+<!-- o div contendo nosso conteúdo a ser mostrado //--> 
+</p>
+        <div id="busca" style="display:none"> 
+         <input type="checkbox"> Filtro 1  <input type="checkbox"> Filtro 2  <input type="checkbox"> Filtro 3  <input type="checkbox"> Filtro 4
+        </div> 
+
+<script> 
+function ativa(){ 
+var div = document.getElementById('busca') 
+/* se conteúdo está escondido, mostra e troca o valor do botão para: esconde */ 
+if (div.style.display == 'none') { 
+document.getElementById("botao").value='Desativar Filtro' 
+div.style.display = 'block' 
+} else { 
+/* se conteúdo está a mostra, esconde o conteúdo e troca o valor do botão para: mostra */ 
+div.style.display = 'none' 
+document.getElementById("botao").value='Ativar Filtro' 
+} 
+} 
+</script>
+  </td>
+   </tr>
+  </tbody>
+</table>
+</body>
+</html>
