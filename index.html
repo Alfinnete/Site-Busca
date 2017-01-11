@@ -1,14 +1,11 @@
-﻿<?
-
-	$db = mysql_connect("","","") or die("Error " . mysqli_error($connection));
-	mysql_select_db("",$db) or die("Error " . mysqli_error($connection));
-
+﻿<?php
+ require_once ('Connection/db.php')
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title> COTAR - Mecanismo de cotação online.</title>
+<title>COTAR - Mecanismo de cotação online.</title>
 <style type="text/css">
 body {
 	margin-left: 0px;
@@ -33,7 +30,7 @@ body,td,th {
 <table width="100%" border="0">
   <tbody>
     <tr>
-      <td height="181" align="center" valign="middle"><a href="index.html"><img src="http://developerdroid.comxa.com/Logo/logo_site.png" width="580" height="102" alt=""/></a></td>
+      <td height="181" align="center" valign="middle"><a href="Bem Vindo.html"><img src="http://developerdroid.comxa.com/Logo/logo_site.png" width="580" height="102" alt=""/></a></td>
     </tr>
     <tr>
       <td height="72" align="center" valign="middle"><p>
@@ -56,10 +53,9 @@ body,td,th {
 		</br>
 		
 
-		
+
 		<?
-		//codigo para efetuar buscas no site
-		if(isset($_POST['botao_pesquisar'])){
+			if(isset($_POST['botao_pesquisar'])){
 				
 				$busca = $_POST['busca'];
 				
@@ -107,22 +103,18 @@ body,td,th {
 			
 		}
 		
-		?>		
+		?>	<!-- fim da tag php -->
 		
-		
-		
-				
 		</form>
-
 		<!-- o div contendo nosso conteúdo a ser mostrado //--> 
 		</p>
-        <div id="busca" style="display:none"> 
+        <div id="filtro_busca" style="display:none"> 
          <input type="checkbox"> Filtro 1  <input type="checkbox"> Filtro 2  <input type="checkbox"> Filtro 3  <input type="checkbox"> Filtro 4
         </div> 
 
 		<script> 
 		function ativa(){ 
-			var div = document.getElementById('busca') 
+			var div = document.getElementById('filtro_busca') 
 			/* se conteúdo está escondido, mostra e troca o valor do botão para: esconde */ 
 			if (div.style.display == 'none') { 
 			document.getElementById("botao").value='Desativar Filtro' 
