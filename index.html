@@ -1,8 +1,14 @@
-﻿<!doctype html>
+﻿<?
+
+	$db = mysql_connect("mysql9.000webhost.com","a6826852_const","downs160697") or die("Error " . mysqli_error($connection));
+	mysql_select_db("a6826852_const",$db) or die("Error " . mysqli_error($connection));
+
+?>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Buscar</title>
+<title> COTAR - Mecanismo de cotação online.</title>
 <style type="text/css">
 body {
 	margin-left: 0px;
@@ -27,39 +33,112 @@ body,td,th {
 <table width="100%" border="0">
   <tbody>
     <tr>
-      <td height="181" align="center" valign="middle"><a href="Bem Vindo.html"><img src="http://developerdroid.comxa.com/Logo/logo_site.png" width="580" height="102" alt=""/></a></td>
+      <td height="181" align="center" valign="middle"><a href="index.html"><img src="http://developerdroid.comxa.com/Logo/logo_site.png" width="580" height="102" alt=""/></a></td>
     </tr>
     <tr>
       <td height="72" align="center" valign="middle"><p>
-        <input name="Buscar" type="search" autofocus id="Buscar" title="Buscar" autocomplete="off" size="100%" maxlength="300">
-        <br>
-        <br>
-        <input type="button" name="button" id="button" value="Buscar">
-        <!-- nosso botão que ativa a função ativa() //--> 
-<input type="button" id="botao" value="Ativar Filtro" onClick="ativa()"> 
+		
+		<!-- campo de busca-->
+	
+		
 
-<!-- o div contendo nosso conteúdo a ser mostrado //--> 
-</p>
+		<form action= "" method="post" name="form_busca">
+				<input name="busca" type="search" autofocus id="busca" title="Buscar" autocomplete="off" size="100%" maxlength="300">    
+				
+		<br>		
+        <br>
+		
+		<input type="submit" name="botao_pesquisar" value="Buscar"> <!-- botao de busca -->
+
+				
+        <!-- nosso botão que ativa a função ativa() --> 
+		<input type="button" id="botao" value="Ativar Filtro" onClick="ativa()"> 
+		</br>
+		
+
+		
+		<?
+		//codigo para efetuar buscas no site
+		if(isset($_POST['botao_pesquisar'])){
+				
+				$busca = $_POST['busca'];
+				
+				if($busca =="" or $busca == " "){
+					echo '<center> <strong> Digite algo para buscar </strong></center>';
+				}else{
+				
+				
+				$busca_dividida = explode(' ',$busca);
+				$quant = count($busca_dividida);
+				$id_mostrado = array("");
+				for($i = 0; $i< $quant; $i++){
+					
+					$pesquisa = $busca_dividida[$i];
+
+					$sql =  mysql_query("SELECT * FROM produtos WHERE p_nome LIKE '%".$busca."%' ORDER BY p_nome");
+					
+					$quantidade = mysql_num_rows($sql);
+					if($quantidade == 0){
+						echo '<center> <strong> Nenhum resultado encontrado </strong></center>';
+					}
+					
+					
+					while($linha = mysql_fetch_array($sql)){
+					$id = $linha['p_id'];
+					$titulo = $linha['p_nome'];
+					$preco = $linha['p_preco'];
+
+						if(array_search($id,$id_mostrado) == false){
+							echo"
+							<div class = 'resultado'>
+							<h2>".$titulo."</h2>
+							<p>".$preco."</p>
+							</div>
+							";
+							array_push($id_mostrado,$id);
+						}		
+					}
+					
+				}
+				
+			}
+		}else{
+			
+			
+		}
+		
+		?>		
+		
+		
+		
+				
+		</form>
+
+		
+		<!--teste--!>
+
+		<!-- o div contendo nosso conteúdo a ser mostrado //--> 
+		</p>
         <div id="busca" style="display:none"> 
          <input type="checkbox"> Filtro 1  <input type="checkbox"> Filtro 2  <input type="checkbox"> Filtro 3  <input type="checkbox"> Filtro 4
         </div> 
 
-<script> 
-function ativa(){ 
-var div = document.getElementById('busca') 
-/* se conteúdo está escondido, mostra e troca o valor do botão para: esconde */ 
-if (div.style.display == 'none') { 
-document.getElementById("botao").value='Desativar Filtro' 
-div.style.display = 'block' 
-} else { 
-/* se conteúdo está a mostra, esconde o conteúdo e troca o valor do botão para: mostra */ 
-div.style.display = 'none' 
-document.getElementById("botao").value='Ativar Filtro' 
-} 
-} 
-</script>
+		<script> 
+		function ativa(){ 
+			var div = document.getElementById('busca') 
+			/* se conteúdo está escondido, mostra e troca o valor do botão para: esconde */ 
+			if (div.style.display == 'none') { 
+			document.getElementById("botao").value='Desativar Filtro' 
+			div.style.display = 'block' 
+			} else { 
+			/* se conteúdo está a mostra, esconde o conteúdo e troca o valor do botão para: mostra */ 
+			div.style.display = 'none' 
+			document.getElementById("botao").value='Ativar Filtro' 
+			} 
+		} 
+		</script>
   </td>
-   </tr>
+ </tr>
   </tbody>
 </table>
 </body>
